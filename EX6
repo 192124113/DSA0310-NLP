@@ -1,13 +1,16 @@
-from nltk import PorterStemmer
-from nltk.tokenize import word_tokenize
-import nltk
-nltk.download('wordnet')
-nltk.download('words')
-nltk.download('stopwords')
-nltk.download('maxent_ne_chunker')
-text="you must be takecare  while crossing road and also lookup the magically"
-port= PorterStemmer()
-words=word_tokenize(text)
-print(words)
-stem1=[port.stem(word) for word in words]
-print(stem1)
+import random
+sample_text = "This is a sample text "
+words = sample_text.split()
+bigrams = [(words[i], words[i+1]) for i in range(len(words)- 1)]
+generated_text = []
+current_word = random.choice(words)  
+for _ in range(50):  # Generating 50 words
+    next_candidates = [b[1] for b in bigrams if b[0] == current_word]
+    if next_candidates:
+        next_word = random.choice(next_candidates)
+    else:
+        next_word = random.choice(words)  
+    generated_text.append(current_word)
+    current_word = next_word
+generated_text = ' '.join(generated_text)
+print("\n",generated_text)
